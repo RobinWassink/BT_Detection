@@ -25,7 +25,7 @@ def main(argv):
     sysCallsList = []
     timestamp = argv[0]
     for mode in modes:
-        sysCalls = countSysCalls("/data/"+timestamp+"/"+mode)
+        sysCalls = countSysCalls("data/"+timestamp+"/"+mode)
         sysCallsList.append(sysCalls)
     print(sysCallsList)
     
