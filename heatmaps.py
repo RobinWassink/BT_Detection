@@ -3,6 +3,8 @@ import os
 import re
 import sys
 import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
 
 def countSysCalls(folder):
     sysCalls = {}
@@ -28,7 +30,13 @@ def main(argv):
     for mode in modes:
         sysCalls = countSysCalls("data/"+timestamp+"/"+mode)
         sysCallsList.append(sysCalls)
-    print(sysCallsList)
+    df = pd.DataFrame(sysCallsList)
+    df.index = modes
+    print(df)
+    sns.heatmap(df, linewidths=.5, square=True)
+    plt.title("System call heatmap for 60 sec monitoring", weight="bold")
+    plt.savefig("heatmap.png", bbox_inches="tight")
+
     
 
 if __name__ == "__main__":
