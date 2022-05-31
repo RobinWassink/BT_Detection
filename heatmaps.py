@@ -2,6 +2,7 @@ import csv
 import os
 import re
 import sys
+import seaborn as sns
 
 def countSysCalls(folder):
     sysCalls = {}
