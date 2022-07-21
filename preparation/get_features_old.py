@@ -7,9 +7,6 @@ import pickle
 import time
 import numpy as np
 
-
-
-
 def get_syscall_dict(ngrams_dict):
     syscall_dict = {}
     i = 0
@@ -59,15 +56,6 @@ def read_all_rawdata( rawdataPath, rawFileNames):
     return corpus_dataframe, corpus
 
 
-def create_onehot_encoding(total, index):
-    onehot = []
-    for i in range(0, total):
-        if i == index:
-            onehot.append(1)
-        else:
-            onehot.append(0)
-    return onehot
-
 def add_unk_to_dict(syscall_dict):
     total = len(syscall_dict)
     syscall_dict['unk'] = total
@@ -82,18 +70,6 @@ def replace_with_unk(syscall_trace, syscall_dict):
         if sc.lower() not in syscall_dict:
             syscall_trace[i] = 'unk'
     return syscall_trace
-
-def trace_onehot_encoding(trace, syscall_dict_onehot):
-    encoded_trace = []
-    for syscall in trace:
-        syscall = syscall.lower()
-        if syscall.lower() in syscall_dict_onehot:
-            one_hot = syscall_dict_onehot[syscall]
-        else:
-            syscall = 'UNK'
-            one_hot = syscall_dict_onehot[syscall]
-        encoded_trace.append(one_hot)
-    return encoded_trace
 
 def find_all_head(trace, head):
     starts, ends,se = [], [], []
@@ -111,6 +87,26 @@ def find_all_head(trace, head):
     se = [(starts[i], ends[i]) for i in range(0, len(starts))]
     return se
 
+def create_onehot_encoding(total, index):
+    onehot = []
+    for i in range(0, total):
+        if i == index:
+            onehot.append(1)
+        else:
+            onehot.append(0)
+    return onehot
+
+def trace_onehot_encoding(trace, syscall_dict_onehot):
+    encoded_trace = []
+    for syscall in trace:
+        syscall = syscall.lower()
+        if syscall.lower() in syscall_dict_onehot:
+            one_hot = syscall_dict_onehot[syscall]
+        else:
+            syscall = 'UNK'
+            one_hot = syscall_dict_onehot[syscall]
+        encoded_trace.append(one_hot)
+    return encoded_trace
 
 def get_dict_sequence(trace,term_dict):
     dict_sequence = []

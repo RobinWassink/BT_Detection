@@ -1,0 +1,345 @@
+feature,clsname,val_score,malware,test_score
+countvectorizer_ngram1,Isolation Forest,0.9,delay,0.03333333333333333
+countvectorizer_ngram1,Isolation Forest,0.9,confusion,0.03333333333333333
+countvectorizer_ngram1,Isolation Forest,0.9,freeze,0.05
+countvectorizer_ngram1,Isolation Forest,0.9,mimic,0.016666666666666666
+countvectorizer_ngram1,Isolation Forest,0.9,noise,0.22
+countvectorizer_ngram1,Isolation Forest,0.9,repeat,0.02666666666666667
+countvectorizer_ngram1,Isolation Forest,0.9,spoof,0.21666666666666667
+countvectorizer_ngram1,Isolation Forest,0.9,total,0.08523809523809524
+countvectorizer_ngram1,One-Class SVM,0.9,delay,0.02666666666666667
+countvectorizer_ngram1,One-Class SVM,0.9,confusion,0.016666666666666666
+countvectorizer_ngram1,One-Class SVM,0.9,freeze,0.03666666666666667
+countvectorizer_ngram1,One-Class SVM,0.9,mimic,0.013333333333333334
+countvectorizer_ngram1,One-Class SVM,0.9,noise,0.023333333333333334
+countvectorizer_ngram1,One-Class SVM,0.9,repeat,0.013333333333333334
+countvectorizer_ngram1,One-Class SVM,0.9,spoof,0.013333333333333334
+countvectorizer_ngram1,One-Class SVM,0.9,total,0.020476190476190478
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,delay,0.056666666666666664
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,confusion,0.03333333333333333
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,freeze,0.03666666666666667
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,mimic,0.023333333333333334
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,noise,1.0
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,repeat,0.056666666666666664
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,spoof,1.0
+countvectorizer_ngram1,Robust covariance,0.9111111111111111,total,0.31523809523809526
+countvectorizer_ngram1,SGD One-Class SVM,1.0,delay,0.0
+countvectorizer_ngram1,SGD One-Class SVM,1.0,confusion,0.0
+countvectorizer_ngram1,SGD One-Class SVM,1.0,freeze,0.0
+countvectorizer_ngram1,SGD One-Class SVM,1.0,mimic,0.0
+countvectorizer_ngram1,SGD One-Class SVM,1.0,noise,0.0
+countvectorizer_ngram1,SGD One-Class SVM,1.0,repeat,0.0
+countvectorizer_ngram1,SGD One-Class SVM,1.0,spoof,0.0
+countvectorizer_ngram1,SGD One-Class SVM,1.0,total,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,delay,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,confusion,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,freeze,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,mimic,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,noise,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,repeat,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,spoof,0.0
+countvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,total,0.0
+countvectorizer_ngram2,Isolation Forest,0.9,delay,0.023333333333333334
+countvectorizer_ngram2,Isolation Forest,0.9,confusion,0.056666666666666664
+countvectorizer_ngram2,Isolation Forest,0.9,freeze,0.056666666666666664
+countvectorizer_ngram2,Isolation Forest,0.9,mimic,0.02
+countvectorizer_ngram2,Isolation Forest,0.9,noise,0.056666666666666664
+countvectorizer_ngram2,Isolation Forest,0.9,repeat,0.03333333333333333
+countvectorizer_ngram2,Isolation Forest,0.9,spoof,0.06666666666666667
+countvectorizer_ngram2,Isolation Forest,0.9,total,0.04476190476190476
+countvectorizer_ngram2,One-Class SVM,0.9,delay,0.02666666666666667
+countvectorizer_ngram2,One-Class SVM,0.9,confusion,0.016666666666666666
+countvectorizer_ngram2,One-Class SVM,0.9,freeze,0.05333333333333334
+countvectorizer_ngram2,One-Class SVM,0.9,mimic,0.013333333333333334
+countvectorizer_ngram2,One-Class SVM,0.9,noise,0.02666666666666667
+countvectorizer_ngram2,One-Class SVM,0.9,repeat,0.013333333333333334
+countvectorizer_ngram2,One-Class SVM,0.9,spoof,0.016666666666666666
+countvectorizer_ngram2,One-Class SVM,0.9,total,0.023809523809523808
+countvectorizer_ngram2,Robust covariance,0.9,delay,0.05
+countvectorizer_ngram2,Robust covariance,0.9,confusion,0.02666666666666667
+countvectorizer_ngram2,Robust covariance,0.9,freeze,0.08
+countvectorizer_ngram2,Robust covariance,0.9,mimic,0.016666666666666666
+countvectorizer_ngram2,Robust covariance,0.9,noise,0.9833333333333333
+countvectorizer_ngram2,Robust covariance,0.9,repeat,0.06666666666666667
+countvectorizer_ngram2,Robust covariance,0.9,spoof,0.9933333333333333
+countvectorizer_ngram2,Robust covariance,0.9,total,0.31666666666666665
+countvectorizer_ngram2,SGD One-Class SVM,1.0,delay,0.0
+countvectorizer_ngram2,SGD One-Class SVM,1.0,confusion,0.0
+countvectorizer_ngram2,SGD One-Class SVM,1.0,freeze,0.0
+countvectorizer_ngram2,SGD One-Class SVM,1.0,mimic,0.0
+countvectorizer_ngram2,SGD One-Class SVM,1.0,noise,0.0
+countvectorizer_ngram2,SGD One-Class SVM,1.0,repeat,0.0
+countvectorizer_ngram2,SGD One-Class SVM,1.0,spoof,0.0
+countvectorizer_ngram2,SGD One-Class SVM,1.0,total,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,delay,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,confusion,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,freeze,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,mimic,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,noise,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,repeat,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,spoof,0.0
+countvectorizer_ngram2,Local Outlier Factor,0.06666666666666667,total,0.0
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,delay,0.023333333333333334
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,confusion,0.06333333333333334
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,freeze,0.08666666666666667
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,mimic,0.016666666666666666
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,noise,0.06333333333333334
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,repeat,0.03
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,spoof,0.043333333333333335
+countvectorizer_ngram3,Isolation Forest,0.8888888888888888,total,0.04666666666666667
+countvectorizer_ngram3,One-Class SVM,0.9,delay,0.02666666666666667
+countvectorizer_ngram3,One-Class SVM,0.9,confusion,0.016666666666666666
+countvectorizer_ngram3,One-Class SVM,0.9,freeze,0.05333333333333334
+countvectorizer_ngram3,One-Class SVM,0.9,mimic,0.013333333333333334
+countvectorizer_ngram3,One-Class SVM,0.9,noise,0.02666666666666667
+countvectorizer_ngram3,One-Class SVM,0.9,repeat,0.013333333333333334
+countvectorizer_ngram3,One-Class SVM,0.9,spoof,0.016666666666666666
+countvectorizer_ngram3,One-Class SVM,0.9,total,0.023809523809523808
+countvectorizer_ngram3,Robust covariance,0.9,delay,0.03333333333333333
+countvectorizer_ngram3,Robust covariance,0.9,confusion,0.016666666666666666
+countvectorizer_ngram3,Robust covariance,0.9,freeze,0.03666666666666667
+countvectorizer_ngram3,Robust covariance,0.9,mimic,0.016666666666666666
+countvectorizer_ngram3,Robust covariance,0.9,noise,1.0
+countvectorizer_ngram3,Robust covariance,0.9,repeat,0.03333333333333333
+countvectorizer_ngram3,Robust covariance,0.9,spoof,1.0
+countvectorizer_ngram3,Robust covariance,0.9,total,0.30523809523809525
+countvectorizer_ngram3,SGD One-Class SVM,1.0,delay,0.0
+countvectorizer_ngram3,SGD One-Class SVM,1.0,confusion,0.0
+countvectorizer_ngram3,SGD One-Class SVM,1.0,freeze,0.0
+countvectorizer_ngram3,SGD One-Class SVM,1.0,mimic,0.0
+countvectorizer_ngram3,SGD One-Class SVM,1.0,noise,0.0
+countvectorizer_ngram3,SGD One-Class SVM,1.0,repeat,0.0
+countvectorizer_ngram3,SGD One-Class SVM,1.0,spoof,0.0
+countvectorizer_ngram3,SGD One-Class SVM,1.0,total,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,delay,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,confusion,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,freeze,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,mimic,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,noise,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,repeat,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,spoof,0.0
+countvectorizer_ngram3,Local Outlier Factor,0.06666666666666667,total,0.0
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,delay,0.03
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,confusion,0.016666666666666666
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,freeze,0.043333333333333335
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,mimic,0.013333333333333334
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,noise,1.0
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,repeat,0.056666666666666664
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,spoof,1.0
+hashingvectorizer_ngram1,Isolation Forest,0.9111111111111111,total,0.30857142857142855
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,delay,0.03333333333333333
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,confusion,0.13333333333333333
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,freeze,0.09333333333333334
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,mimic,0.023333333333333334
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,noise,1.0
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,repeat,0.08
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,spoof,1.0
+hashingvectorizer_ngram1,One-Class SVM,0.8888888888888888,total,0.3376190476190476
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,delay,0.023333333333333334
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,confusion,0.02
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,freeze,0.043333333333333335
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,mimic,0.016666666666666666
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,noise,1.0
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,repeat,0.10666666666666667
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,spoof,1.0
+hashingvectorizer_ngram1,Robust covariance,0.9222222222222223,total,0.3157142857142857
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,delay,0.0
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,confusion,0.0
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,freeze,0.0
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,mimic,0.0
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,noise,0.0
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,repeat,0.0
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,spoof,0.0
+hashingvectorizer_ngram1,SGD One-Class SVM,1.0,total,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,delay,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,confusion,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,freeze,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,mimic,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,noise,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,repeat,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,spoof,0.0
+hashingvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,total,0.0
+index_sequence_features,Isolation Forest,0.9111111111111111,delay,0.04
+index_sequence_features,Isolation Forest,0.9111111111111111,confusion,0.05
+index_sequence_features,Isolation Forest,0.9111111111111111,freeze,0.04666666666666667
+index_sequence_features,Isolation Forest,0.9111111111111111,mimic,0.05
+index_sequence_features,Isolation Forest,0.9111111111111111,noise,0.14
+index_sequence_features,Isolation Forest,0.9111111111111111,repeat,0.05
+index_sequence_features,Isolation Forest,0.9111111111111111,spoof,0.18333333333333332
+index_sequence_features,Isolation Forest,0.9111111111111111,total,0.08
+index_sequence_features,One-Class SVM,0.43333333333333335,delay,0.5
+index_sequence_features,One-Class SVM,0.43333333333333335,confusion,0.44333333333333336
+index_sequence_features,One-Class SVM,0.43333333333333335,freeze,0.5066666666666667
+index_sequence_features,One-Class SVM,0.43333333333333335,mimic,0.5
+index_sequence_features,One-Class SVM,0.43333333333333335,noise,1.0
+index_sequence_features,One-Class SVM,0.43333333333333335,repeat,0.5333333333333333
+index_sequence_features,One-Class SVM,0.43333333333333335,spoof,1.0
+index_sequence_features,One-Class SVM,0.43333333333333335,total,0.6404761904761904
+index_sequence_features,SGD One-Class SVM,1.0,delay,0.0
+index_sequence_features,SGD One-Class SVM,1.0,confusion,0.0
+index_sequence_features,SGD One-Class SVM,1.0,freeze,0.0
+index_sequence_features,SGD One-Class SVM,1.0,mimic,0.0
+index_sequence_features,SGD One-Class SVM,1.0,noise,0.0
+index_sequence_features,SGD One-Class SVM,1.0,repeat,0.0
+index_sequence_features,SGD One-Class SVM,1.0,spoof,0.0
+index_sequence_features,SGD One-Class SVM,1.0,total,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,delay,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,confusion,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,freeze,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,mimic,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,noise,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,repeat,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,spoof,0.0
+index_sequence_features,Local Outlier Factor,0.05555555555555555,total,0.0
+onehot_sequence_features,Isolation Forest,0.8888888888888888,delay,0.03
+onehot_sequence_features,Isolation Forest,0.8888888888888888,confusion,0.04666666666666667
+onehot_sequence_features,Isolation Forest,0.8888888888888888,freeze,0.03666666666666667
+onehot_sequence_features,Isolation Forest,0.8888888888888888,mimic,0.056666666666666664
+onehot_sequence_features,Isolation Forest,0.8888888888888888,noise,0.07
+onehot_sequence_features,Isolation Forest,0.8888888888888888,repeat,0.05
+onehot_sequence_features,Isolation Forest,0.8888888888888888,spoof,0.09
+onehot_sequence_features,Isolation Forest,0.8888888888888888,total,0.054285714285714284
+onehot_sequence_features,One-Class SVM,0.6444444444444445,delay,0.26666666666666666
+onehot_sequence_features,One-Class SVM,0.6444444444444445,confusion,0.22666666666666666
+onehot_sequence_features,One-Class SVM,0.6444444444444445,freeze,0.27666666666666667
+onehot_sequence_features,One-Class SVM,0.6444444444444445,mimic,0.2866666666666667
+onehot_sequence_features,One-Class SVM,0.6444444444444445,noise,1.0
+onehot_sequence_features,One-Class SVM,0.6444444444444445,repeat,0.30666666666666664
+onehot_sequence_features,One-Class SVM,0.6444444444444445,spoof,1.0
+onehot_sequence_features,One-Class SVM,0.6444444444444445,total,0.4804761904761905
+onehot_sequence_features,SGD One-Class SVM,1.0,delay,0.0
+onehot_sequence_features,SGD One-Class SVM,1.0,confusion,0.0
+onehot_sequence_features,SGD One-Class SVM,1.0,freeze,0.0
+onehot_sequence_features,SGD One-Class SVM,1.0,mimic,0.0
+onehot_sequence_features,SGD One-Class SVM,1.0,noise,0.0
+onehot_sequence_features,SGD One-Class SVM,1.0,repeat,0.0
+onehot_sequence_features,SGD One-Class SVM,1.0,spoof,0.0
+onehot_sequence_features,SGD One-Class SVM,1.0,total,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,delay,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,confusion,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,freeze,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,mimic,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,noise,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,repeat,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,spoof,0.0
+onehot_sequence_features,Local Outlier Factor,0.13333333333333333,total,0.0
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,delay,0.05
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,confusion,0.02666666666666667
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,freeze,0.04
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,mimic,0.013333333333333334
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,noise,1.0
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,repeat,0.043333333333333335
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,spoof,1.0
+tfidfvectorizer_ngram1,Isolation Forest,0.9111111111111111,total,0.31047619047619046
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,delay,0.06666666666666667
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,confusion,0.12
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,freeze,0.09333333333333334
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,mimic,0.02666666666666667
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,noise,1.0
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,repeat,0.09666666666666666
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,spoof,1.0
+tfidfvectorizer_ngram1,One-Class SVM,0.8888888888888888,total,0.3433333333333333
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,delay,0.03333333333333333
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,confusion,0.03
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,freeze,0.05
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,mimic,0.016666666666666666
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,noise,1.0
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,repeat,0.08666666666666667
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,spoof,1.0
+tfidfvectorizer_ngram1,Robust covariance,0.9222222222222223,total,0.31666666666666665
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,delay,0.0
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,confusion,0.0
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,freeze,0.0
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,mimic,0.0
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,noise,0.0
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,repeat,0.0
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,spoof,0.0
+tfidfvectorizer_ngram1,SGD One-Class SVM,1.0,total,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,delay,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,confusion,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,freeze,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,mimic,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,noise,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,repeat,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,spoof,0.0
+tfidfvectorizer_ngram1,Local Outlier Factor,0.07777777777777778,total,0.0
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,delay,0.013333333333333334
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,confusion,0.07
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,freeze,0.06666666666666667
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,mimic,0.016666666666666666
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,noise,0.06666666666666667
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,repeat,0.043333333333333335
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,spoof,0.07333333333333333
+tfidfvectorizer_ngram2,Isolation Forest,0.9111111111111111,total,0.05
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,delay,0.17666666666666667
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,confusion,0.35
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,freeze,0.20666666666666667
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,mimic,0.08333333333333333
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,noise,1.0
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,repeat,0.11
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,spoof,1.0
+tfidfvectorizer_ngram2,One-Class SVM,0.7888888888888889,total,0.4180952380952381
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,delay,0.043333333333333335
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,confusion,0.016666666666666666
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,freeze,0.05
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,mimic,0.03333333333333333
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,noise,1.0
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,repeat,0.08666666666666667
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,spoof,1.0
+tfidfvectorizer_ngram2,Robust covariance,0.9222222222222223,total,0.31857142857142856
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,delay,0.0
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,confusion,0.0
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,freeze,0.0
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,mimic,0.0
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,noise,0.0
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,repeat,0.0
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,spoof,0.0
+tfidfvectorizer_ngram2,SGD One-Class SVM,1.0,total,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,delay,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,confusion,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,freeze,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,mimic,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,noise,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,repeat,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,spoof,0.0
+tfidfvectorizer_ngram2,Local Outlier Factor,0.08888888888888889,total,0.0
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,delay,0.03
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,confusion,0.06333333333333334
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,freeze,0.07333333333333333
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,mimic,0.02
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,noise,0.18666666666666668
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,repeat,0.07666666666666666
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,spoof,0.17666666666666667
+tfidfvectorizer_ngram3,Isolation Forest,0.8888888888888888,total,0.08952380952380952
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,delay,0.29
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,confusion,0.52
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,freeze,0.35
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,mimic,0.20666666666666667
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,noise,1.0
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,repeat,0.2
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,spoof,1.0
+tfidfvectorizer_ngram3,One-Class SVM,0.6777777777777778,total,0.5095238095238095
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,delay,0.023333333333333334
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,confusion,0.016666666666666666
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,freeze,0.043333333333333335
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,mimic,0.023333333333333334
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,noise,1.0
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,repeat,0.07
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,spoof,1.0
+tfidfvectorizer_ngram3,Robust covariance,0.9111111111111111,total,0.310952380952381
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,delay,0.0
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,confusion,0.0
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,freeze,0.0
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,mimic,0.0
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,noise,0.0
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,repeat,0.0
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,spoof,0.0
+tfidfvectorizer_ngram3,SGD One-Class SVM,1.0,total,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,delay,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,confusion,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,freeze,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,mimic,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,noise,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,repeat,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,spoof,0.0
+tfidfvectorizer_ngram3,Local Outlier Factor,0.07777777777777778,total,0.0
