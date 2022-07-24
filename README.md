@@ -21,8 +21,10 @@ The following shows the outline structure of the this system.
       |—— preparation
         |—— get_features.py
         |—— scaling.py
-      |—— detectionmodule
+      |—— ML
         |—— ml.py
+      |—— visualization
+        |—— performance_evaluation.py
    ```
    
 * Create the features with
