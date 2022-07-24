@@ -16,7 +16,8 @@ def main():
     dirname = os.path.dirname(__file__)
     modes_folder = os.path.abspath(os.path.join(dirname, "modes"))
     graphics_folder = os.path.abspath(os.path.join(dirname, "graphics"))
-    arr = np.zeros((len(folders), len(models), len(features), len(modes)))
+    arr_tpr = np.zeros((len(folders), len(models), len(features), len(modes)))
+    arr_tnr = np.zeros((len(folders), len(models), len(features), len(modes)))
 
     for i, folder in enumerate(folders):
         results_path = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/results/"))
@@ -24,72 +25,156 @@ def main():
         for index, row in results.iterrows():
             feature, model, val_score, mode, performance = row[0], row[1], row[2], row[3], row[4]
             if val_score >= 0.87:
-                arr[i, models.index(model), features.index(feature), modes.index(mode)] = performance
+                arr_tpr[i, models.index(model), features.index(feature), modes.index(mode)] = performance
             else: 
-                arr[i, models.index(model), features.index(feature), modes.index(mode)] = 0
-    print(arr)
+                arr_tpr[i, models.index(model), features.index(feature), modes.index(mode)] = 0
+    print(arr_tpr)
+
+    for i, folder in enumerate(folders):
+        results_path = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/results/"))
+        results = pd.read_csv(os.path.join(results_path, "res.csv"), sep=',')
+        for index, row in results.iterrows():
+            feature, model, val_score, mode, performance = row[0], row[1], row[2], row[3], row[4]
+            arr_tnr[i, models.index(model), features.index(feature), modes.index(mode)] = val_score
+
+    print(arr_tnr)
 
     # -------------------------------------------------------------------------------- #
-    # all models over all bandwidths 
-    models_total_average = []
+    # all models over all bandwidths - TPR
+    models_total_average_tpr = []
     for i, folder in enumerate(folders): #folders
         for model in models: #models
-            all_features_average = []
+            all_features_average_tpr = []
             for feature in features: #features
-                all_features_average.append(arr[i, models.index(model), features.index(feature), modes.index("total")])
-                print("The " + model + " algorithm has a performance of " + str(arr[i, models.index(model), features.index(feature), modes.index("total")]) + " with the feature " + feature)
+                all_features_average_tpr.append(arr_tpr[i, models.index(model), features.index(feature), modes.index("total")])
+                print("The " + model + " algorithm has a performance of " + str(arr_tpr[i, models.index(model), features.index(feature), modes.index("total")]) + " with the feature " + feature)
                 #for mode in modes: #modes
                     #performance
-            models_total_average.append(average(all_features_average))
-            print("The " + model + " algorithm has an average performance of " + str(average(all_features_average))+ " with a bandwidth of: " + bandwidths[i])
+            models_total_average_tpr.append(average(all_features_average_tpr))
+            print("The " + model + " algorithm has an average performance of " + str(average(all_features_average_tpr))+ " with a bandwidth of: " + bandwidths[i])
 
-    IF_performances = pd.DataFrame(list(zip(5*["Isolation Forest"],bandwidths,models_total_average[models.index("Isolation Forest")::len(models)])))
-    SVM_performances = pd.DataFrame(list(zip(5*["One-Class SVM"],bandwidths, models_total_average[models.index("One-Class SVM")::len(models)])))
-    RC_performances = pd.DataFrame(list(zip(5*["Robust covariance"],bandwidths, models_total_average[models.index("Robust covariance")::len(models)])))
-    SGDSVM_performances = pd.DataFrame(list(zip(5*["SGD One-Class SVM"],bandwidths,models_total_average[models.index("SGD One-Class SVM")::len(models)])))
-    LOF_performances =  pd.DataFrame(list(zip(5*["Local Outlier Factor"],bandwidths, models_total_average[models.index("Local Outlier Factor")::len(models)])))
+    IF_performances_tpr = pd.DataFrame(list(zip(5*["Isolation Forest"],bandwidths,models_total_average_tpr[models.index("Isolation Forest")::len(models)])))
+    SVM_performances_tpr = pd.DataFrame(list(zip(5*["One-Class SVM"],bandwidths, models_total_average_tpr[models.index("One-Class SVM")::len(models)])))
+    RC_performances_tpr = pd.DataFrame(list(zip(5*["Robust covariance"],bandwidths, models_total_average_tpr[models.index("Robust covariance")::len(models)])))
+    SGDSVM_performances_tpr = pd.DataFrame(list(zip(5*["SGD One-Class SVM"],bandwidths,models_total_average_tpr[models.index("SGD One-Class SVM")::len(models)])))
+    LOF_performances_tpr =  pd.DataFrame(list(zip(5*["Local Outlier Factor"],bandwidths, models_total_average_tpr[models.index("Local Outlier Factor")::len(models)])))
 
-    df_mod_bw = pd.concat([IF_performances, SVM_performances, RC_performances, SGDSVM_performances, LOF_performances])
-    df_mod_bw.columns =['model', 'bandwidth', 'performance']
-    print(df_mod_bw)
+    df_mod_bw_tpr = pd.concat([IF_performances_tpr, SVM_performances_tpr, RC_performances_tpr, SGDSVM_performances_tpr, LOF_performances_tpr])
+    df_mod_bw_tpr.columns =['model', 'bandwidth', 'performance']
+    print(df_mod_bw_tpr)
 
     plt.figure()
-    df_mod_bw_fig = sns.barplot(data=df_mod_bw, x='bandwidth', y='performance', hue='model')
-    plt.title("Model comparison for each bandwidth", weight="bold")
+    ax = plt.gca()  
+    df_mod_bw_fig = sns.barplot(data=df_mod_bw_tpr, x='bandwidth', y='performance', hue='model')
+    ax.set_ylabel('TPR')
+    ax.set_xlabel('')
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
-    plt.savefig(graphics_folder + "\\" + "Model_bandwidth_comparison.png", bbox_inches="tight")
+    plt.savefig(graphics_folder + "\\" + "Model_bandwidth_TPR_comparison.png", bbox_inches="tight")
 
     # -------------------------------------------------------------------------------- #
-    # average models & bandwidhts
-    IF_total_average = average(models_total_average[models.index("Isolation Forest")::len(models)])
-    SVM_total_average = average(models_total_average[models.index("One-Class SVM")::len(models)])
-    RC_total_average = average(models_total_average[models.index("Robust covariance")::len(models)])
-    SGDSVM_total_average = average(models_total_average[models.index("SGD One-Class SVM")::len(models)])
-    LOF_total_average = average(models_total_average[models.index("Local Outlier Factor")::len(models)])
+    # average models & bandwidhts - TPR 
+    IF_total_tpr_average = average(models_total_average_tpr[models.index("Isolation Forest")::len(models)])
+    SVM_total_tpr_average = average(models_total_average_tpr[models.index("One-Class SVM")::len(models)])
+    RC_total_tpr_average = average(models_total_average_tpr[models.index("Robust covariance")::len(models)])
+    SGDSVM_total_tpr_average = average(models_total_average_tpr[models.index("SGD One-Class SVM")::len(models)])
+    LOF_total_tpr_average = average(models_total_average_tpr[models.index("Local Outlier Factor")::len(models)])
 
-    df_mod = pd.DataFrame(columns=["model", "performance"])
-    df_mod.loc[len(df_mod.index)] = ["Isolation Forest", IF_total_average]
-    df_mod.loc[len(df_mod.index)] = ["One-Class SVM", SVM_total_average]
-    df_mod.loc[len(df_mod.index)] = ["Robust covariance", RC_total_average]
-    df_mod.loc[len(df_mod.index)] = ["SGD One-Class SVM", SGDSVM_total_average]
-    df_mod.loc[len(df_mod.index)] = ["Local Outlier Factor", LOF_total_average]
+    df_mod_tpr = pd.DataFrame(columns=["model", "performance"])
+    df_mod_tpr.loc[len(df_mod_tpr.index)] = ["Isolation Forest", IF_total_tpr_average]
+    df_mod_tpr.loc[len(df_mod_tpr.index)] = ["One-Class SVM", SVM_total_tpr_average]
+    df_mod_tpr.loc[len(df_mod_tpr.index)] = ["Robust covariance", RC_total_tpr_average]
+    df_mod_tpr.loc[len(df_mod_tpr.index)] = ["SGD One-Class SVM", SGDSVM_total_tpr_average]
+    df_mod_tpr.loc[len(df_mod_tpr.index)] = ["Local Outlier Factor", LOF_total_tpr_average]
 
-    print(df_mod)
+    print(df_mod_tpr)
 
     plt.figure()
     ax = plt.gca()
     plt.setp( ax.xaxis.get_majorticklabels(), rotation=-45, ha="left", rotation_mode="anchor")
-    df_mod_fig = sns.barplot(data=df_mod, x='model', y='performance')
-    plt.title("Model comparison", weight="bold")
-    plt.savefig(dirname + "\\" + "Model_comparison.png", bbox_inches="tight")
+    df_mod_fig = sns.barplot(data=df_mod_tpr, x='model', y='performance')
+    ax.set_ylabel('TPR')
+    ax.set_xlabel('')
+    plt.savefig(graphics_folder + "\\" + "Model_TPR_comparison.png", bbox_inches="tight")
+
+    # -------------------------------------------------------------------------------- #
+    # all models over all bandwidths - TNR
+    models_total_average_tnr = []
+    for i, folder in enumerate(folders): #folders
+        for model in models: #models
+            all_features_average_tnr = []
+            for feature in features: #features
+                all_features_average_tnr.append(arr_tnr[i, models.index(model), features.index(feature), modes.index("total")])
+                print("The " + model + " algorithm has a performance of " + str(arr_tnr[i, models.index(model), features.index(feature), modes.index("total")]) + " with the feature " + feature)
+                #for mode in modes: #modes
+                    #performance
+            models_total_average_tnr.append(average(all_features_average_tnr))
+            print("The " + model + " algorithm has an average performance of " + str(average(all_features_average_tnr))+ " with a bandwidth of: " + bandwidths[i])
+
+    IF_performances_tnr = pd.DataFrame(list(zip(5*["Isolation Forest"],bandwidths,models_total_average_tnr[models.index("Isolation Forest")::len(models)])))
+    SVM_performances_tnr = pd.DataFrame(list(zip(5*["One-Class SVM"],bandwidths, models_total_average_tnr[models.index("One-Class SVM")::len(models)])))
+    RC_performances_tnr = pd.DataFrame(list(zip(5*["Robust covariance"],bandwidths, models_total_average_tnr[models.index("Robust covariance")::len(models)])))
+    SGDSVM_performances_tnr = pd.DataFrame(list(zip(5*["SGD One-Class SVM"],bandwidths,models_total_average_tnr[models.index("SGD One-Class SVM")::len(models)])))
+    LOF_performances_tnr =  pd.DataFrame(list(zip(5*["Local Outlier Factor"],bandwidths, models_total_average_tnr[models.index("Local Outlier Factor")::len(models)])))
+
+    df_mod_bw_tnr = pd.concat([IF_performances_tnr, SVM_performances_tnr, RC_performances_tnr, SGDSVM_performances_tnr, LOF_performances_tnr])
+    df_mod_bw_tnr.columns =['model', 'bandwidth', 'performance']
+    print(df_mod_bw_tnr)
+
+    plt.figure()
+    df_mod_bw_fig = sns.barplot(data=df_mod_bw_tnr, x='bandwidth', y='performance', hue='model')
+    ax.set_ylabel('TNR')
+    ax.set_xlabel('')    
+    plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
+    plt.savefig(graphics_folder + "\\" + "Model_bandwidth_TNR_comparison.png", bbox_inches="tight")
+
+    # -------------------------------------------------------------------------------- #
+    # average models & bandwidhts - TNR
+    IF_total_average_tnr = average(models_total_average_tnr[models.index("Isolation Forest")::len(models)])
+    SVM_total_average_tnr = average(models_total_average_tnr[models.index("One-Class SVM")::len(models)])
+    RC_total_average_tnr = average(models_total_average_tnr[models.index("Robust covariance")::len(models)])
+    SGDSVM_total_average_tnr = average(models_total_average_tnr[models.index("SGD One-Class SVM")::len(models)])
+    LOF_total_average_tnr = average(models_total_average_tnr[models.index("Local Outlier Factor")::len(models)])
+
+    df_mod_tnr = pd.DataFrame(columns=["model", "performance"])
+    df_mod_tnr.loc[len(df_mod_tnr.index)] = ["Isolation Forest", IF_total_average_tnr]
+    df_mod_tnr.loc[len(df_mod_tnr.index)] = ["One-Class SVM", SVM_total_average_tnr]
+    df_mod_tnr.loc[len(df_mod_tnr.index)] = ["Robust covariance", RC_total_average_tnr]
+    df_mod_tnr.loc[len(df_mod_tnr.index)] = ["SGD One-Class SVM", SGDSVM_total_average_tnr]
+    df_mod_tnr.loc[len(df_mod_tnr.index)] = ["Local Outlier Factor", LOF_total_average_tnr]
+
+    print(df_mod_tnr)
+
+    plt.figure()
+    ax = plt.gca()
+    plt.setp( ax.xaxis.get_majorticklabels(), rotation=-45, ha="left", rotation_mode="anchor")
+    df_mod_fig = sns.barplot(data=df_mod_tnr, x='model', y='performance')
+    ax.set_ylabel('TNR')
+    ax.set_xlabel('')
+    plt.savefig(graphics_folder + "\\" + "Model_TNR_comparison.png", bbox_inches="tight")
+
+    # -------------------------------------------------------------------------------- #
+    # average models & bandwidhts
+    df_mod_tnr["Accuracy"] = 5*["TNR"]
+    df_mod_tpr["Accuracy"] = 5*["TPR"]
+
+    df_mod_tnr_tpr = pd.concat([df_mod_tnr, df_mod_tpr])
+
+    plt.figure()
+    ax = plt.gca()
+    plt.setp( ax.xaxis.get_majorticklabels(), rotation=-45, ha="left", rotation_mode="anchor")
+    df_mod_tnr_tpr_fig = sns.barplot(data=df_mod_tnr_tpr, x='model', y='performance', hue='Accuracy')
+    ax.set_ylabel('')
+    ax.set_xlabel('')
+    plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
+    plt.savefig(graphics_folder + "\\" + "Model_TPR_TNR_comparison.png", bbox_inches="tight")
 
     # -------------------------------------------------------------------------------- #
     # all bws and modes for RC with tfidfvectorizer_ngram1
     attack_comparison = []
     for i, folder in enumerate(folders): #folders
         for mode in modes: #features
-            attack_comparison.append(arr[i, models.index("Robust covariance"), features.index("tfidfvectorizer_ngram1"), modes.index(mode)])
-            print("The " + model + " algorithm has a performance of " + str(arr[i, models.index("Robust covariance"), features.index("tfidfvectorizer_ngram1"), modes.index(mode)]) + " with the feature " + feature + " in mode " + mode)
+            attack_comparison.append(arr_tpr[i, models.index("Robust covariance"), features.index("tfidfvectorizer_ngram1"), modes.index(mode)])
+            print("The " + model + " algorithm has a performance of " + str(arr_tpr[i, models.index("Robust covariance"), features.index("tfidfvectorizer_ngram1"), modes.index(mode)]) + " with the feature " + feature + " in mode " + mode)
 
     RC_TFIDF_modes_20000 = pd.DataFrame(list(zip(len(modes)*["20000"],modes,attack_comparison[bandwidths.index("20000")*len(modes):bandwidths.index("20000")+len(modes)])))
     RC_TFIDF_modes_200000 = pd.DataFrame(list(zip(len(modes)*["200000"],modes, attack_comparison[bandwidths.index("200000")*len(modes):bandwidths.index("200000")*len(modes)+len(modes)])))
@@ -114,8 +199,8 @@ def main():
         for feature in features: #features
             all_models_average = []
             for model in models: #models
-                all_models_average.append(arr[i, models.index(model), features.index(feature), modes.index("total")])
-                print(feature + " has a performance of " + str(arr[i, models.index(model), features.index(feature), modes.index("total")]) + " with the model " + model)
+                all_models_average.append(arr_tpr[i, models.index(model), features.index(feature), modes.index("total")])
+                print(feature + " has a performance of " + str(arr_tpr[i, models.index(model), features.index(feature), modes.index("total")]) + " with the model " + model)
             features_total_average.append(average(all_models_average))
             print(feature + " has an average performance of " + str(average(all_models_average))+ " with a bandwidth of: " + bandwidths[i])
 
@@ -147,25 +232,26 @@ def main():
     ax = plt.gca()
     plt.setp( ax.xaxis.get_majorticklabels(), rotation=-45, ha="left", rotation_mode="anchor")
     df_features_average_fig = sns.barplot(data=df_features_average, x='feature', y='performance')
-    plt.title("Feature comparison", weight="bold")
+    ax.set_ylabel('TPR')
+    ax.set_xlabel('')
     plt.savefig(graphics_folder + "\\" + "Feature_comparison.png", bbox_inches="tight")
 
-    # -------------------------------------------------------------------------------- #
+    # # -------------------------------------------------------------------------------- #
     # scaled vs not scaled
     folders_scaled = ["2022-07-07_17-27-05_fft_200000_30"]
     features_scaled = ["countvectorizer_ngram1-scaled", "countvectorizer_ngram2-scaled", "countvectorizer_ngram3-scaled", "tfidfvectorizer_ngram1-scaled", "tfidfvectorizer_ngram2-scaled", "tfidfvectorizer_ngram3-scaled"]
     features_not_scaled = ["countvectorizer_ngram1", "countvectorizer_ngram2", "countvectorizer_ngram3", "tfidfvectorizer_ngram1", "tfidfvectorizer_ngram2", "tfidfvectorizer_ngram3"]
 
-    arr_scaled = np.zeros((len(folders_scaled), len(models), len(features_scaled), len(modes)))
+    arr_tpr_scaled = np.zeros((len(folders_scaled), len(models), len(features_scaled), len(modes)))
     for i, folder in enumerate(folders_scaled):
-        results_path = os.path.abspath(os.path.join(graphics_folder, "../data/"+folder+"/results/"))
+        results_path = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/results/"))
         results = pd.read_csv(os.path.join(results_path, "res-scaled.csv"), sep=',')
         for index, row in results.iterrows():
             feature, model, val_score, mode, performance = row[0], row[1], row[2], row[3], row[4]
             if val_score >= 0.87:
-                arr_scaled[i, models.index(model), features_scaled.index(feature), modes.index(mode)] = performance
+                arr_tpr_scaled[i, models.index(model), features_scaled.index(feature), modes.index(mode)] = performance
             else: 
-                arr_scaled[i, models.index(model), features_scaled.index(feature), modes.index(mode)] = 0
+                arr_tpr_scaled[i, models.index(model), features_scaled.index(feature), modes.index(mode)] = 0
 
     features_total_average_scaled = []
     features_total_average_not_scaled = []
@@ -174,8 +260,8 @@ def main():
             all_models_average_scaled = []
             all_models_average_not_scaled = []
             for model in models: #models
-                all_models_average_scaled.append(arr_scaled[0,models.index(model), features_scaled.index(feature), modes.index("total")])
-                all_models_average_not_scaled.append(arr[folders.index(folder), models.index(model), features.index(features_not_scaled[i]), modes.index("total")])
+                all_models_average_scaled.append(arr_tpr_scaled[0,models.index(model), features_scaled.index(feature), modes.index("total")])
+                all_models_average_not_scaled.append(arr_tpr[folders.index(folder), models.index(model), features.index(features_not_scaled[i]), modes.index("total")])
             features_total_average_scaled.append(average(all_models_average_scaled))
             features_total_average_not_scaled.append(average(all_models_average_not_scaled))
             print(feature + " has an average performance of " + str(features_total_average_scaled[-1]))
@@ -195,30 +281,45 @@ def main():
     ax = plt.gca()
     plt.setp( ax.xaxis.get_majorticklabels(), rotation=-45, ha="left", rotation_mode="anchor")
     df_scaled_vs_normal_fig = sns.barplot(data=df_scaled_vs_normal, x='feature', y='performance', hue='scaled')
-    plt.title("Scaled vs. normal", weight="bold")
+    ax.set_ylabel('TPR')
+    ax.set_xlabel('')
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
     plt.savefig(graphics_folder + "\\" + "Features_scaled_comparison.png", bbox_inches="tight")
 
     # -------------------------------------------------------------------------------- #
     # modes over bandwidth
     df_modes_model_bw = pd.DataFrame(columns=["bandwidth", "model", "mode", "performance"])
-
+    modes.append("normal")
     for i, folder in enumerate(folders): #folders
         for model in models:
             for mode in modes: #features
-                performance = (arr[i, models.index(model), features.index("countvectorizer_ngram3"), modes.index(mode)])
-                df_modes_model_bw.loc[len(df_modes_model_bw.index)] = [bandwidths[i], model, mode, performance]
+                if mode == "normal":
+                    performance = (arr_tnr[i, models.index(model), features.index("countvectorizer_ngram3"), 0])
+                    df_modes_model_bw.loc[len(df_modes_model_bw.index)] = [bandwidths[i], model, mode, performance]
+                else:
+                    performance = (arr_tpr[i, models.index(model), features.index("countvectorizer_ngram3"), modes.index(mode)])
+                    df_modes_model_bw.loc[len(df_modes_model_bw.index)] = [bandwidths[i], model, mode, performance]
+
+
 
     print(df_modes_model_bw)
 
     for mode in modes:
         df_mode = df_modes_model_bw.loc[df_modes_model_bw["mode"] == mode, ["model", "performance"]]
         plt.figure()
+        ax = plt.gca()
+        ax.set_ylim([-.1, 1.1])
         for model in models:
             plt.plot(bandwidths, list(df_mode.loc[df_mode["model"] == model, "performance"]), label=model)
         
-        plt.title(mode, weight="bold")
         plt.legend(loc="best")
+        if mode != "total":
+            plt.title(mode, weight="bold")
+        if mode == "normal":
+            ax.set_ylabel('TNR')
+        else:
+            ax.set_ylabel('TPR')
+        ax.set_xlabel('')
         plt.savefig(modes_folder + "\\" + mode + ".png", bbox_inches="tight")
 
 

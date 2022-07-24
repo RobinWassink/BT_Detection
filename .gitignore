@@ -1,11 +1,3 @@
-# /data/*/raw
-# /data/*/features/csv
-# /data/*/features/dict/*
-# !/data/*/features/dict/encoded_trace_df.pk
+/data
 
-/data/*/raw
-/data/*/features
-/data/*/visualization/*
-!/data/*/visualization/*.png
-
-/data/outdated
+/visualization/screenshots

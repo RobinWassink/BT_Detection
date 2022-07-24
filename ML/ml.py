@@ -33,7 +33,7 @@ def train(train_data, test_data, clsname, total_test_data):
             "One-Class SVM": OneClassSVM(cache_size=200, gamma='scale', kernel='rbf',nu=0.05,  shrinking=True, tol=0.001,verbose=False),
             "SGD One-Class SVM": SGDOneClassSVM(nu=outliers_fraction, shuffle=True, fit_intercept=True, random_state=42, tol=1e-4),
             "Isolation Forest": IsolationForest(contamination=outliers_fraction,random_state=42),
-            "Local Outlier Factor": LOF(n_neighbors=50, contamination=outliers_fraction)
+            "Local Outlier Factor": LOF(n_neighbors=20, contamination=outliers_fraction)
         }
 
     name = clsname
@@ -48,7 +48,7 @@ def train(train_data, test_data, clsname, total_test_data):
         print(e)
         y_pred = []
         val_score = 0
-    
+
     test_scores = []
     for maltype in test_data:
         X_test = np.array(maltype)
@@ -69,6 +69,7 @@ def train(train_data, test_data, clsname, total_test_data):
         X_test = X_test.reshape((nsamples,nx*ny))
 
     y_pred = clf.predict(X_test)
+
     test_scores.append(metrics.accuracy_score(y_test, y_pred))
     return clf, val_score, test_scores
 
@@ -76,7 +77,7 @@ def train(train_data, test_data, clsname, total_test_data):
 def run(argv):
     folder = argv[0]
     dirname = os.path.dirname(__file__)
-    csv_files = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/features/csv-scaled/"))
+    csv_files = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/features/csv/"))
     features = os.listdir(csv_files)
     malwares=["delay", "confusion", "freeze", "mimic", "noise", "repeat", "spoof"]
     resultsPath = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/results/"))
@@ -115,7 +116,7 @@ def run(argv):
     df = pd.DataFrame(res)
     df.columns = ['feature', 'clsname', 'val_score', 'malware', 'test_score']
     print(df)
-    df.to_csv(resultsPath + "\\" + 'res-scaled.csv', index=False)
+    df.to_csv(resultsPath + "\\" + 'res.csv', index=False)
  
 
 if __name__ == "__main__":
