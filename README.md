@@ -1,11 +1,10 @@
 # BT_Detection
 
-This repository contains the code used in the ML framework part of the bachelor thesis "Implementation and Detection of Spectrum Data Falsification Attacks Affecting Crowdsensing Platforms".
+This repository contains the code used in the ML framework part of the bachelor thesis "Implementation and Detection of Spectrum Data Falsification Attacks Affecting Crowdsensing Platforms". The code used in the Raspberry PI (SSDF Attacks + Monitoring) can be found in [another repository](https://github.com/RobinWassink/BT_SSDF_Attacks).
 
 ## How to 
 
-* Get de data from *link*. Add it to this directory so you get the following structure:
-The following shows the outline structure of the this system.
+* Get the data either from the link provided with the email containing the bachelor thesis or ask the author for the link. Add it to this directory so you get the following structure:
    ```bash
       |—— data
         |—— 2022-07-06_13-06-52_fft_20000_30

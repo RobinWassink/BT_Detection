@@ -61,13 +61,13 @@ def main(argv):
     visualization_path = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/visualization/"))
     modes = ["normal", "repeat", "mimic", "confusion", "noise", "spoof", "freeze", "delay"]
     
-    if os.path.exists(visualization_path + "\\df.pk"):
+    if os.path.exists(os.path.abspath(os.path.join(visualization_path, "df.pk"))):
         print("Found df.pk file")
-        loc=open(visualization_path + "\\df.pk",'rb')
+        loc=open(os.path.abspath(os.path.join(visualization_path, "df.pk")),'rb')
         df = pickle.load(loc)
     else:
-        if os.path.exists(visualization_path + "\\syscalls_total.csv"):
-            syscalls_total = pd.read_csv(visualization_path + "\\syscalls_total.csv", sep=',')
+        if os.path.exists(os.path.abspath(os.path.join(visualization_path, "syscalls_total.csv"))):
+            syscalls_total = pd.read_csv(os.path.abspath(os.path.join(visualization_path, "syscalls_total.csv")), sep=',')
         else: 
             print("no total syscalls table found!")
             return 0
@@ -83,7 +83,7 @@ def main(argv):
                             for j in sysCallsDic[i].keys()},
                         orient='index')
 
-        pickle.dump(df, open(visualization_path + "\\df.pk", "wb"))
+        pickle.dump(df, open(os.path.abspath(os.path.join(visualization_path, "df.pk")), "wb"))
 
     # print(df)
     # print(df.shape)
@@ -109,7 +109,7 @@ def main(argv):
             plt.ylim(0.95*ymin, 1.05*ymax)
             plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
             plt.title(syscall, fontsize=20, weight="bold")
-            plt.savefig(visualization_path + "\\" + syscall + "_evolution.png", bbox_inches="tight")
+            plt.savefig(os.path.abspath(os.path.join(visualization_path, syscall+"_evolution.png")), bbox_inches="tight")
             #plt.show()
 
 if __name__ == "__main__":

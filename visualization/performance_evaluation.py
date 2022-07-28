@@ -69,7 +69,7 @@ def main():
     ax.set_ylabel('TPR')
     ax.set_xlabel('')
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
-    plt.savefig(graphics_folder + "\\" + "Model_bandwidth_TPR_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Model_bandwidth_TPR_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # average models & bandwidhts - TPR 
@@ -94,7 +94,7 @@ def main():
     df_mod_fig = sns.barplot(data=df_mod_tpr, x='model', y='performance')
     ax.set_ylabel('TPR')
     ax.set_xlabel('')
-    plt.savefig(graphics_folder + "\\" + "Model_TPR_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Model_TPR_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # all models over all bandwidths - TNR
@@ -125,7 +125,7 @@ def main():
     ax.set_ylabel('TNR')
     ax.set_xlabel('')    
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
-    plt.savefig(graphics_folder + "\\" + "Model_bandwidth_TNR_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Model_bandwidth_TNR_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # average models & bandwidhts - TNR
@@ -150,7 +150,7 @@ def main():
     df_mod_fig = sns.barplot(data=df_mod_tnr, x='model', y='performance')
     ax.set_ylabel('TNR')
     ax.set_xlabel('')
-    plt.savefig(graphics_folder + "\\" + "Model_TNR_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Model_TNR_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # average models & bandwidhts
@@ -166,7 +166,7 @@ def main():
     ax.set_ylabel('')
     ax.set_xlabel('')
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
-    plt.savefig(graphics_folder + "\\" + "Model_TPR_TNR_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Model_TPR_TNR_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # all bws and modes for RC with tfidfvectorizer_ngram1
@@ -190,7 +190,7 @@ def main():
     RC_TFIDF_modes_bw_fig = sns.barplot(data=RC_TFIDF_modes_bw, x='bandwidth', y='performance', hue='mode')
     plt.title("Robust covariance with tfidfvectorizer_ngram1 for each bandwidth", weight="bold")
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
-    plt.savefig(graphics_folder + "\\" + "Mode_bandwidth_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Mode_bandwidth_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # all features over all bandwidths 
@@ -218,7 +218,7 @@ def main():
     df_feat_bw_fig = sns.barplot(data=df_feat_bw, x='bandwidth', y='performance', hue='feature')
     plt.title("All features average for each bandwidth", weight="bold")
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
-    plt.savefig(graphics_folder + "\\" + "Features_bandwidth_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Features_bandwidth_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # average features
@@ -234,7 +234,7 @@ def main():
     df_features_average_fig = sns.barplot(data=df_features_average, x='feature', y='performance')
     ax.set_ylabel('TPR')
     ax.set_xlabel('')
-    plt.savefig(graphics_folder + "\\" + "Feature_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Feature_comparison.png")), bbox_inches="tight")
 
     # # -------------------------------------------------------------------------------- #
     # scaled vs not scaled
@@ -284,7 +284,7 @@ def main():
     ax.set_ylabel('TPR')
     ax.set_xlabel('')
     plt.legend(bbox_to_anchor=(1.02,0.5), loc="center left", borderaxespad=0)
-    plt.savefig(graphics_folder + "\\" + "Features_scaled_comparison.png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(graphics_folder, "Features_scaled_comparison.png", bbox_inches="tight")))
 
     # -------------------------------------------------------------------------------- #
     # modes over bandwidth
@@ -315,6 +315,8 @@ def main():
         plt.legend(loc="best")
         if mode != "total":
             plt.title(mode, weight="bold")
+        else: plt.title("")
+        
         if mode == "normal":
             ax.set_ylabel('TNR')
         else:

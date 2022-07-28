@@ -39,8 +39,8 @@ def main(argv):
     if not os.path.exists(visualization_path):
         os.makedirs(visualization_path, exist_ok=True)
 
-    if os.path.exists(visualization_path + "\\" + "syscalls_60sec.csv"):
-        df = pd.read_csv(visualization_path + "\\" + "syscalls_60sec.csv", sep=',')
+    if os.path.exists(os.path.join(visualization_path, "syscalls_60sec.csv")):
+        df = pd.read_csv(os.path.join(visualization_path, "syscalls_60sec.csv"), sep=',')
         df.index = modes
     else: 
         for mode in modes:
@@ -49,7 +49,8 @@ def main(argv):
         df = pd.DataFrame(sysCallsList)
         df.index = modes
 
-        df.to_csv(visualization_path + "\\syscalls_60sec.csv", sep=",", index=False)
+        df.to_csv(os.path.abspath(os.path.join(visualization_path, "syscalls_60sec.csv")), sep=",", index=False)
+        
 
     move_column = df.pop("timerfd_settime")
     df.insert(1, "timerfd_settime", move_column)
@@ -65,7 +66,8 @@ def main(argv):
     
     sns.heatmap(df, linewidths=.5, square=True, cmap="YlGnBu", cbar_kws={"format": formatter})
     plt.title("System call heatmap for 60 sec monitoring  \n and {}Hz bandwidth".format(bandwidth), weight="bold")
-    plt.savefig(visualization_path + "\\" + "heatmap2_"+folder+".png", bbox_inches="tight")
+    plt.savefig(os.path.abspath(os.path.join(visualization_path, "heatmap_60sec"+folder+".png")), bbox_inches="tight")
+    
 
     
 

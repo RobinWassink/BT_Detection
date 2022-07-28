@@ -1,25 +1,16 @@
+from re import T
+from tkinter import N
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer, HashingVectorizer
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import os,sys
 import tqdm
 import pickle
-import time
 import numpy as np
-import csv
 
 max_n_gram = 4
 syscall_list=["llseek", "_newselect", "_sysctl", "accept", "accept4", "access", "acct", "add_key", "adjtimex", "alarm", "alloc_hugepages", "bdflush", "bind", "bpf", "brk", "cacheflush", "capget", "capset", "chdir", "chmod", "chown", "chown32", "chroot", "clock_adjtime", "clock_getres", "clock_gettime", "clock_nanosleep", "clock_settime", "clone", "close", "connect", "copy_file_range", "creat", "create_module", "delete_module", "dup", "dup2", "dup3", "epoll_create", "epoll_create1", "epoll_ctl", "epoll_pwait", "epoll_wait", "eventfd", "eventfd2", "execve", "execveat", "exit", "exit_group", "faccessat", "fadvise64", "fadvise64_64", "fallocate", "fanotify_init", "fanotify_mark", "fchdir", "fchmod", "fchmodat", "fchown", "fchown32", "fchownat", "fcntl", "fcntl64", "fdatasync", "fgetxattr", "finit_module", "flistxattr", "flock", "fork", "free_hugepages", "fremovexattr", "fsetxattr", "fstat", "fstat64", "fstatat64", "fstatfs", "fstatfs64", "fsync", "ftruncate", "ftruncate64", "futex", "futimesat", "get_kernel_syms", "get_mempolicy", "get_robust_list", "get_thread_area", "getcpu", "getcwd", "getdents", "getdents64", "getegid", "getegid32", "geteuid", "geteuid32", "getgid", "getgid32", "getgroups", "getgroups32", "getitimer", "getpeername", "getpagesize", "getpgid", "getpgrp", "getpid", "getppid", "getpriority", "getrandom", "getresgid", "getresgid32", "getresuid", "getresuid32", "getrlimit", "getrusage", "getsid", "getsockname", "getsockopt", "gettid", "gettimeofday", "getuid", "getuid32", "getxattr", "init_module", "inotify_add_watch", "inotify_init", "inotify_rm_watch", "io_cancel", "io_destroy", "io_getevents", "io_setup", "io_submit", "ioctl", "ioperm", "iopl", "ioprio_get", "ioprio_set", "ipc", "kcmp", "kern_features", "kexec_file_load", "kexec_load", "keyctl", "kill", "lchown", "lchown32", "lgetxattr", "link", "linkat", "listen", "listxattr", "llistxattr", "lookup_dcookie", "lremovexattr", "lseek", "lsetxattr", "lstat", "lstat64", "madvise", "mbind", "memfd_create", "migrate_pages", "mincore", "mkdir", "mkdirat", "mknod", "mknodat", "mlock", "mlock2", "mlockall", "mmap", "mmap2", "modify_ldt", "mount", "move_pages", "mprotect", "mq_getsetattr", "mq_notify", "mq_open", "mq_timedreceive", "mq_timedsend", "mq_unlink", "mremap", "msgctl", "msgget", "msgrcv", "msgsnd", "msync", "munlock", "munlockall", "munmap", "name_to_handle_at", "nanosleep", "nfsservctl", "nice", "oldfstat", "oldlstat", "oldolduname", "oldstat", "olduname", "open", "open_by_handle_at", "openat", "pause", "pciconfig_iobase", "pciconfig_read", "pciconfig_write", "perf_event_open", "personality", "perfctr", "perfmonctl", "pipe", "pipe2", "pivot_root", "pkey_alloc", "pkey_free", "pkey_mprotect", "poll", "ppc_rtas", "ppc_swapcontext", "ppoll", "prctl", "pread64", "preadv", "preadv2", "prlimit64", "process_vm_readv", "process_vm_writev", "pselect6", "ptrace", "pwrite64", "pwritev", "pwritev2", "query_module", "quotactl", "read", "readahead", "readdir", "readlink", "readlinkat", "readv", "reboot", "recv", "recvfrom", "recvmsg", "recvmmsg", "remap_file_pages", "removexattr", "rename", "renameat", "renameat2", "request_key", "restart_syscall", "rmdir", "rt_sigaction", "rt_sigpending", "rt_sigprocmask", "rt_sigqueueinfo", "rt_sigreturn", "rt_sigsuspend", "rt_sigtimedwait", "rt_tgsigqueueinfo", "s390_runtime_instr", "s390_pci_mmio_read", "s390_pci_mmio_write", "sched_get_priority_max", "sched_get_priority_min", "sched_getaffinity", "sched_getattr", "sched_getparam", "sched_getscheduler", "sched_rr_get_interval", "sched_setaffinity", "sched_setattr", "sched_setparam", "sched_setscheduler", "sched_yield", "seccomp", "select", "semctl", "semget", "semop", "semtimedop", "send", "sendfile", "sendfile64", "sendmmsg", "sendmsg", "sendto", "set_mempolicy", "set_robust_list", "set_thread_area", "set_tid_address", "setdomainname", "setfsgid", "setfsgid32", "setfsuid", "setfsuid32", "setgid", "setgid32", "setgroups", "setgroups32", "sethostname", "setitimer", "setns", "setpgid", "setpriority", "setregid", "setregid32", "setresgid", "setresgid32", "setresuid", "setresuid32", "setreuid", "setreuid32", "setrlimit", "setsid", "setsockopt", "settimeofday", "setuid", "setuid32", "setup", "setxattr", "sgetmask", "shmat", "shmctl", "shmdt", "shmget", "shutdown", "sigaction", "sigaltstack", "signal", "signalfd", "signalfd4", "sigpending", "sigprocmask", "sigreturn", "sigsuspend", "socket", "socketcall", "socketpair", "splice", "spu_create", "spu_run", "ssetmask", "stat", "stat64", "statfs", "statfs64", "stime", "subpage_prot", "swapoff", "swapon", "symlink", "symlinkat", "sync", "sync_file_range", "sync_file_range2", "syncfs", "sysfs", "sysinfo", "syslog", "tee", "tgkill", "time", "timer_create", "timer_delete", "timer_getoverrun", "timer_gettime", "timer_settime", "timerfd_create", "timerfd_gettime", "timerfd_settime", "times", "tkill", "truncate", "truncate64", "ugetrlimit", "umask", "umount", "umount2", "uname", "unlink", "unlinkat", "unshare", "uselib", "ustat", "userfaultfd", "utime", "utimensat", "utimes", "utrap_install", "vfork", "vhangup", "vm86old", "vm86", "vmsplice", "wait4", "waitid", "waitpid", "write", "writev"]
 
-def get_dict_sequence(trace,term_dict):
-    dict_sequence = []
-    for syscall in trace:
-        if syscall in term_dict:
-            dict_sequence.append(term_dict[syscall])
-        else:
-            dict_sequence.append(term_dict['unk'])
-    return dict_sequence
-
+# Create the system call dictionary
 def get_syscall_dict(ngrams_dict):
     syscall_dict = {}
     i = 0
@@ -29,6 +20,7 @@ def get_syscall_dict(ngrams_dict):
             i+=1
     return syscall_dict
 
+# Create the vectorizers to transform the data later
 def create_vectorizers(corpus, base_dict_path):
     os.makedirs(base_dict_path, exist_ok=True)
     for i in range(1, max_n_gram):
@@ -40,20 +32,20 @@ def create_vectorizers(corpus, base_dict_path):
 
 
         countvectorizer = CountVectorizer(ngram_range=(i, i)).fit(corpus)
-        pickle.dump(countvectorizer, open(base_dict_path + "\\" + cvName, "wb"))
+        pickle.dump(countvectorizer, open(os.path.abspath(os.path.join(base_dict_path, cvName + ".pk")), "wb"))
 
         ngrams_dict = countvectorizer.vocabulary_
-        pickle.dump(ngrams_dict, open(base_dict_path + "\\" + ndName, "wb"))
+        pickle.dump(ngrams_dict, open(os.path.abspath(os.path.join(base_dict_path, cvName + ".pk")), "wb"))
 
         tfidfvectorizer = TfidfVectorizer(ngram_range=(i, i), vocabulary=ngrams_dict).fit(corpus)
-        pickle.dump(tfidfvectorizer, open(base_dict_path + "\\" + tvName, "wb"))
+        pickle.dump(tfidfvectorizer, open(os.path.abspath(os.path.join(base_dict_path, tvName + ".pk")), "wb"))
 
         if i == 1:
             syscall_dict = get_syscall_dict(ngrams_dict)
-            pickle.dump(syscall_dict, open(base_dict_path + "\\" + sdName, "wb"))
+            pickle.dump(syscall_dict, open(os.path.abspath(os.path.join(base_dict_path, sdName + ".pk")), "wb"))
 
             hashingvectorizer = HashingVectorizer(n_features=2**5).fit(corpus)  
-            pickle.dump(hashingvectorizer, open(base_dict_path + "\\" + hvName, "wb"))
+            pickle.dump(hashingvectorizer, open(os.path.abspath(os.path.join(base_dict_path, hvName + ".pk")), "wb"))
         
 # Transform list of strings (system call instruction) to one long string of system calls
 def from_trace_to_longstr(syscall_trace):
@@ -70,9 +62,9 @@ def read_all_rawdata(rawdataPath, rawFileNames):
     # Check if there exist any pickle files, read them if yes
     if any('.pk' in fileName for fileName in rawFileNames):
         print("reading data from pickle files")
-        loc=open(rawdataPath + "\\" + 'corpus_dataframe.pk','rb')
+        loc=open(os.path.abspath(os.path.join(rawdataPath, 'corpus_dataframe.pk')),'rb')
         corpus_dataframe = pickle.load(loc)
-        loc=open(rawdataPath + "\\" + 'corpus.pk','rb')
+        loc=open(os.path.abspath(os.path.join(rawdataPath, 'corpus.pk')),'rb')
         corpus = pickle.load(loc)
 
     # If there are no pickle files yet, read the raw data
@@ -93,11 +85,14 @@ def read_all_rawdata(rawdataPath, rawFileNames):
                 corpus.append(longstr)
 
         # Create pickle files (so it's faster next time)
-        pickle.dump(corpus, open(rawdataPath + "\\" + 'corpus.pk', "wb"))
-        pickle.dump(corpus_dataframe, open(rawdataPath + "\\" + 'corpus_dataframe.pk', "wb"))
+        pickle.dump(corpus, open(os.path.abspath(os.path.join(rawdataPath, 'corpus.pk')), "wb"))
+        pickle.dump(corpus_dataframe, open(os.path.abspath(os.path.join(rawdataPath, 'corpus_dataframe.pk')), "wb"))
+        
+        
         par.close()
     return corpus_dataframe, corpus
 
+# Equalize all the lists to either minimum or static value
 def equalize_list_length(uneq_list):
     shortened_list = []
     #minLength = min(len(x) for x in uneq_list)
@@ -106,15 +101,18 @@ def equalize_list_length(uneq_list):
         shortened_list.append(feature[:minLength])
     return shortened_list
 
+# create a onehot dictionary
 def  create_onehot_dictionary(syscall_dict):
     onehot_dict = syscall_dict.copy()
     zero_list = [0] * len(syscall_dict.keys())
+    # create a list of 0's for every system call, where nth item represents the index of the system call as a 1
     for index, key in enumerate(onehot_dict):
         zero_list[index] = 1
         onehot_dict[key] = zero_list
         zero_list = [0] * len(syscall_dict.keys())
     return onehot_dict
 
+# go through all colums and create a file for each one with the first two columns
 def write_to_csv(encoded_trace_df, feature_path):
     if not os.path.exists(feature_path):
         os.makedirs(feature_path, exist_ok=True)
@@ -124,7 +122,7 @@ def write_to_csv(encoded_trace_df, feature_path):
         df = encoded_trace_df[["ids", "maltype"]]
         df_list = encoded_trace_df[encoded_trace_df.columns[i]].apply(lambda x: x.tolist())
         df.insert(2, encoded_trace_df.columns[i], df_list, True)
-        df.to_csv(feature_path + "\\" + file_name, sep="\t", index=False)
+        df.to_csv(os.path.abspath(os.path.join(feature_path, file_name)), sep="\t", index=False)
 
 def read_dicts(dictPath):
     vectorizers = {}
@@ -136,144 +134,136 @@ def read_dicts(dictPath):
         ndName = 'ngrams_dict_ngram{}'.format(i)
         sdName = 'syscall_dict_ngram{}'.format(i)
 
-        loc=open(dictPath + "\\" + cvName+'.pk','rb')
+        loc=open(os.path.abspath(os.path.join(dictPath, cvName + ".pk")),'rb')
         cv = pickle.load(loc)
         vectorizers[cvName] = cv
 
-        loc=open(dictPath + "\\" + tvName+'.pk','rb')
+        loc=open(os.path.abspath(os.path.join(dictPath, tvName + ".pk")),'rb')
         tv = pickle.load(loc)
         vectorizers[tvName] = tv
 
-        loc=open(dictPath + "\\" + ndName+'.pk','rb')
+        loc=open(os.path.abspath(os.path.join(dictPath, ndName + ".pk")),'rb')
         nd = pickle.load(loc)
         dicts[ndName] = nd
 
         if i == 1:
-            loc=open(dictPath + "\\" + hvName+'.pk','rb')
+            loc=open(os.path.abspath(os.path.join(dictPath, hvName + ".pk")),'rb')
             hv = pickle.load(loc)
             vectorizers[hvName] = hv
 
-            loc=open(dictPath + "\\" + sdName+'.pk','rb')
+            loc=open(os.path.abspath(os.path.join(dictPath, sdName + ".pk")),'rb')
             sd = pickle.load(loc)
             dicts[sdName] = sd
 
     return vectorizers, dicts
 
+# Get features, "pseudo" main function
 def get_features(argv):
-    # Creating variable names for the corresponding folders and later used variables
+
+    # Creating variable names for the corresponding folders and variables used later on
     folder = argv[0]
     dirname = os.path.dirname(__file__)
     rawdataPath = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/raw/"))
     base_dict_path = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/features/pickle/"))
     feature_path = os.path.abspath(os.path.join(dirname, "../data/"+folder+"/features/csv/"))
+    rawFileNames = os.listdir(rawdataPath)
+    features, columns = [], []
+    ids, maltype = [], []
 
-    # if the encoded dataframe has been made before --> load it
-    if False: #os.path.exists(base_dict_path + "\\" + "encoded_trace_df.pk"):
-        print("Found encoded dataframe, loading it...")
-        loc=open(base_dict_path + "\\" + "encoded_trace_df.pk",'rb')
-        encoded_trace_df = pickle.load(loc)
+    # Create the initial dataframe with one column representing a sample and a column with it's corresponding behaviour
+    for fileName in rawFileNames:
+        if '.csv' in fileName:
+            fis = fileName.split('_')
+            fn = fis[0]
+            i = '{}_{}_{}'.format(fis[0], fis[1], fis[2])
+            maltype.append(fn)
+            ids.append(i)
+    features.append(ids)
+    columns.append("ids")
+    features.append(maltype)
+    columns.append("maltype")
 
-        write_to_csv(encoded_trace_df, feature_path)
+    # Read the data (either from the pickle files that have been created previously or the raw data)
+    print('start to read rawdata')
+    corpus_dataframe, corpus = read_all_rawdata(rawdataPath, rawFileNames)
+    print('got rawdata')
 
-        return 0
-        
-    # if not --> create it
-    else:
-        rawFileNames = os.listdir(rawdataPath)
-        features, columns = [], []
-        ids, maltype = [], []
+    # Create Vectorizers and dictionaries if they don't exist yet
+    if not os.path.exists(base_dict_path):
+        print("creating vectorizers")
+        create_vectorizers(corpus, base_dict_path)
+    print("loading vectorizers")
 
-        # Create the initial dataframe with one column representing a sample and a column with it's corresponding behaviour
-        for fileName in rawFileNames:
-            if '.csv' in fileName:
-                fis = fileName.split('_')
-                fn = fis[0]
-                i = '{}_{}_{}'.format(fis[0], fis[1], fis[2])
-                maltype.append(fn)
-                ids.append(i)
-        features.append(ids)
-        columns.append("ids")
-        features.append(maltype)
-        columns.append("maltype")
+    # Read in the vectorizers and dictionaries
+    vectorizers, dicts = read_dicts(base_dict_path)
+    print('get dicts finished!')
 
-        # Read the data (either from the pickle files that have been created previously or the raw data)
-        print('start to read rawdata')
-        corpus_dataframe, corpus = read_all_rawdata(rawdataPath, rawFileNames)
-        print('got rawdata')
+    # Prepare sequence feature extraction -> creaet the used dictionaries
+    syscall_dict = dicts["syscall_dict_ngram1"]
+    onehot_dict = create_onehot_dictionary(syscall_dict)
+    index_sequence_features = []
+    onehot_sequence_features = []
 
-        # Create Vectorizers and dictionaries if they don't exist yet
-        if not os.path.exists(base_dict_path):
-            print("creating vectorizers")
-            create_vectorizers(corpus, base_dict_path)
-        print("loading vectorizers")
+    # Create both sequence features
+    for trace in corpus_dataframe:
+        trace_list = trace.iloc[:,2].tolist()
+        index_sequence_feature = [syscall_dict.get(item,item) for item in trace_list if item in syscall_list]
+        onehot_sequence_feature = [onehot_dict.get(item,item) for item in trace_list if item in syscall_list]
+        index_sequence_features.append(index_sequence_feature)
+        onehot_sequence_features.append(onehot_sequence_feature)
+    
+    # Shorten the sequence features
+    index_sequence_shortened = equalize_list_length(index_sequence_features)
+    onehot_sequence_features_shortened = equalize_list_length(onehot_sequence_features)
 
-        # Read in the vectorizers and dictionaries
-        vectorizers, dicts = read_dicts(base_dict_path)
-        print('get dicts finished!')
+    # Append the sequence features to the final dataframe
+    features.append(np.array(index_sequence_shortened))
+    columns.append("index_sequence_features")
+    features.append(np.array(onehot_sequence_features_shortened))
+    columns.append("onehot_sequence_features")
 
-        # for key, value in vectorizers.items():
-        #     print(key, ' : ', value)
-        # for key, value in dicts.items():
-        #     print(key, ' : ', value)
+    # use the vectorizers to create the actual features
+    for i in range(1, max_n_gram):
+        cvName = 'countvectorizer_ngram{}'.format(i)
+        tvName = 'tfidfvectorizer_ngram{}'.format(i)
 
-        syscall_dict = dicts["syscall_dict_ngram1"]
-        onehot_dict = create_onehot_dictionary(syscall_dict)
-        index_sequence_features = []
-        onehot_sequence_features = []
+        cv = vectorizers[cvName]
+        tv = vectorizers[tvName]
 
-        print(syscall_dict)
+        # the frequency features
+        frequency_features = cv.transform(corpus)
+        frequency_features = frequency_features.toarray()
 
-        for trace in corpus_dataframe:
-            trace_list = trace.iloc[:,2].tolist()
-            index_sequence_feature = [syscall_dict.get(item,item) for item in trace_list if item in syscall_list]
-            onehot_sequence_feature = [onehot_dict.get(item,item) for item in trace_list if item in syscall_list]
-            index_sequence_features.append(index_sequence_feature)
-            onehot_sequence_features.append(onehot_sequence_feature)
-      
-        index_sequence_shortened = equalize_list_length(index_sequence_features)
-        onehot_sequence_features_shortened = equalize_list_length(onehot_sequence_features)
+        # the tfidf features
+        tfidf_features = tv.transform(corpus)
+        tfidf_features = tfidf_features.toarray()
 
-        features.append(np.array(index_sequence_shortened))
-        columns.append("index_sequence_features")
-        features.append(np.array(onehot_sequence_features_shortened))
-        columns.append("onehot_sequence_features")
+        # and add them to the final dataframe
+        features.append(frequency_features)
+        columns.append(cvName)
+        features.append(tfidf_features)
+        columns.append(tvName)
 
-        # use the vectorizers to create the actual features
-        for i in range(1, max_n_gram):
-            cvName = 'countvectorizer_ngram{}'.format(i)
-            tvName = 'tfidfvectorizer_ngram{}'.format(i)
+    # hashed feature creation and addition to the final dataframe
+    hvName = 'hashingvectorizer_ngram{}'.format(1)
+    hv = vectorizers[hvName]
+    hashing_features = hv.transform(corpus)
+    hashing_features = hashing_features.toarray()
+    features.append(hashing_features)     
+    columns.append(hvName)
+    
+    # Modify and print final dataframe
+    encoded_trace_df = pd.DataFrame(features).transpose()
+    encoded_trace_df.columns = columns
+    print(encoded_trace_df)
 
-            cv = vectorizers[cvName]
-            tv = vectorizers[tvName]
+    # store the created features in a pickle file
+    pickle.dump(encoded_trace_df, open(os.path.abspath(os.path.join(base_dict_path, "encoded_trace_df.pk")), "wb"))
 
-            # the frequency features
-            frequency_features = cv.transform(corpus)
-            frequency_features = frequency_features.toarray()
+    # Write every single column of the final dataframe to a file
+    write_to_csv(encoded_trace_df, feature_path)
 
-            # the tfidf features
-            tfidf_features = tv.transform(corpus)
-            tfidf_features = tfidf_features.toarray()
 
-            features.append(frequency_features)
-            columns.append(cvName)
-            features.append(tfidf_features)
-            columns.append(tvName)
-
-        # hashed feature
-        hvName = 'hashingvectorizer_ngram{}'.format(1)
-        hv = vectorizers[hvName]
-        hashing_features = hv.transform(corpus)
-        hashing_features = hashing_features.toarray()
-        features.append(hashing_features)     
-        columns.append(hvName)
-            
-        encoded_trace_df = pd.DataFrame(features).transpose()
-        encoded_trace_df.columns = columns
-        print(encoded_trace_df)
-
-        # store the created features in a pickle file
-        pickle.dump(encoded_trace_df, open(base_dict_path + "\\" + 'encoded_trace_df.pk', "wb"))
-        write_to_csv(encoded_trace_df, feature_path)
-
+# Main function, get features with the folder given as argument
 if __name__ == "__main__":
     get_features(sys.argv[1:])
