@@ -32,20 +32,20 @@ def create_vectorizers(corpus, base_dict_path):
 
 
         countvectorizer = CountVectorizer(ngram_range=(i, i)).fit(corpus)
-        pickle.dump(countvectorizer, open(os.path.abspath(os.path.join(base_dict_path, cvName + ".pk")), "wb"))
+        pickle.dump(countvectorizer, open(os.path.abspath(os.path.join(base_dict_path, cvName)), "wb"))
 
         ngrams_dict = countvectorizer.vocabulary_
-        pickle.dump(ngrams_dict, open(os.path.abspath(os.path.join(base_dict_path, cvName + ".pk")), "wb"))
+        pickle.dump(ngrams_dict, open(os.path.abspath(os.path.join(base_dict_path, ndName)), "wb"))
 
         tfidfvectorizer = TfidfVectorizer(ngram_range=(i, i), vocabulary=ngrams_dict).fit(corpus)
-        pickle.dump(tfidfvectorizer, open(os.path.abspath(os.path.join(base_dict_path, tvName + ".pk")), "wb"))
+        pickle.dump(tfidfvectorizer, open(os.path.abspath(os.path.join(base_dict_path, tvName)), "wb"))
 
         if i == 1:
             syscall_dict = get_syscall_dict(ngrams_dict)
-            pickle.dump(syscall_dict, open(os.path.abspath(os.path.join(base_dict_path, sdName + ".pk")), "wb"))
+            pickle.dump(syscall_dict, open(os.path.abspath(os.path.join(base_dict_path, sdName)), "wb"))
 
             hashingvectorizer = HashingVectorizer(n_features=2**5).fit(corpus)  
-            pickle.dump(hashingvectorizer, open(os.path.abspath(os.path.join(base_dict_path, hvName + ".pk")), "wb"))
+            pickle.dump(hashingvectorizer, open(os.path.abspath(os.path.join(base_dict_path, hvName)), "wb"))
         
 # Transform list of strings (system call instruction) to one long string of system calls
 def from_trace_to_longstr(syscall_trace):

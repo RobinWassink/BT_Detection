@@ -1,6 +1,7 @@
 # BT_Detection
 
-This repository contains the code used in the ML framework part of the bachelor thesis "Implementation and Detection of Spectrum Data Falsification Attacks Affecting Crowdsensing Platforms". The code used in the Raspberry PI (SSDF Attacks + Monitoring) can be found in [another repository](https://github.com/RobinWassink/BT_SSDF_Attacks).
+This repository contains the code used in the ML framework part of the bachelor thesis "Implementation and Detection of Spectrum Data Falsification Attacks Affecting Crowdsensing Platforms".\
+The code used in the Raspberry PI (SSDF Attacks + Monitoring) can be found in [another repository](https://github.com/RobinWassink/BT_SSDF_Attacks).
 
 ## How to 
 
@@ -17,7 +18,7 @@ This repository contains the code used in the ML framework part of the bachelor 
           |—— raw
         |—— 2022-07-11_16-41-53_rtlsdr_800000000_30
           |—— raw
-      |—— preparation
+      |—— preprocessing
         |—— get_features.py
         |—— scaling.py
       |—— ML
@@ -28,11 +29,11 @@ This repository contains the code used in the ML framework part of the bachelor 
    
 * Create the features with
 ```
-python preparation/get_features.py {FOLDER}
+python preprocessing/get_features.py {FOLDER}
 ```
 eg. 
 ```
-python preparation/get_features.py 2022-07-07_17-27-05_fft_200000_30
+python preprocessing/get_features.py 2022-07-07_17-27-05_fft_200000_30
 ```
 
 * Train the models with
